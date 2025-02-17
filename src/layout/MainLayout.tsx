@@ -3,10 +3,7 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext'; // Or however you track roles
 import { Box } from '@mui/material';
-import StudentSidebar from './StudentSidebar';
-import AdminSidebar from './AdminSidebar';
-import StudentHeader from './StudentHeader';
-import AdminHeader from './AdminHeader';
+
 
 /**
  * A single layout that shows either the Student sidebar/header or Admin sidebar/header

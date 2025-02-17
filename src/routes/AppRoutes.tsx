@@ -4,6 +4,11 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
 
+
+//Home
+import Home from '../pages/Home';
+
+
 // Auth
 import Login from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
@@ -39,6 +44,11 @@ function AppRoutes() {
   return (
     <Box sx={{ mt: 2 }}>
       <Routes>
+
+         {/* Home/Landing Page */}
+         <Route path="/" element={<Home />} />
+
+         
         {/* Auth (Public) */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
