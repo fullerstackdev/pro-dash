@@ -1,5 +1,3 @@
-// src/pages/Admin/AdminDashboard.tsx
-
 import React from 'react';
 import {
   Box,
@@ -20,12 +18,18 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import ReviewsIcon from '@mui/icons-material/Reviews';
-import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+
+/**
+ * Admin Dashboard, v1.2:
+ * - Dark background, paper cards
+ * - Orange (#ff9800) as accent color
+ * - Box shadow on hover
+ */
 
 function AdminDashboard() {
   return (
-    <Box sx={{ p: 3, bgcolor: '#1e1e1e', minHeight: '100vh', color: '#fff' }}>
+    <Box sx={{ p: 3, minHeight: '100vh' }}>
       {/* Title */}
       <Box display="flex" alignItems="center" mb={3}>
         <LightbulbIcon sx={{ color: '#ff9800', fontSize: 32, mr: 1 }} />
@@ -33,7 +37,7 @@ function AdminDashboard() {
           <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ff9800' }}>
             Welcome, Lisa!
           </Typography>
-          <Typography variant="body2" sx={{ color: '#ccc' }}>
+          <Typography variant="body2" color="text.secondary">
             E-commerce Admin Dashboard
           </Typography>
         </Box>
@@ -50,7 +54,14 @@ function AdminDashboard() {
       <Grid container spacing={2} mb={4}>
         {/* EARNINGS */}
         <Grid item xs={6} md={4} lg={2}>
-          <Card sx={{ height: '100%', bgcolor: '#2a2a2a', ':hover': { boxShadow: 4 }, color: '#fff' }}>
+          <Card
+            sx={{
+              height: '100%',
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardHeader
               title="EARNINGS"
               subheader="$ 315.20"
@@ -59,10 +70,16 @@ function AdminDashboard() {
             />
           </Card>
         </Grid>
-
         {/* ORDERS */}
         <Grid item xs={6} md={4} lg={2}>
-          <Card sx={{ height: '100%', bgcolor: '#2a2a2a', ':hover': { boxShadow: 4 }, color: '#fff' }}>
+          <Card
+            sx={{
+              height: '100%',
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardHeader
               title="ORDERS"
               subheader="16"
@@ -71,10 +88,16 @@ function AdminDashboard() {
             />
           </Card>
         </Grid>
-
         {/* SESSIONS */}
         <Grid item xs={6} md={4} lg={2}>
-          <Card sx={{ height: '100%', bgcolor: '#2a2a2a', ':hover': { boxShadow: 4 }, color: '#fff' }}>
+          <Card
+            sx={{
+              height: '100%',
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardHeader
               title="SESSIONS"
               subheader="463"
@@ -83,10 +106,16 @@ function AdminDashboard() {
             />
           </Card>
         </Grid>
-
         {/* USERS */}
         <Grid item xs={6} md={4} lg={2}>
-          <Card sx={{ height: '100%', bgcolor: '#2a2a2a', ':hover': { boxShadow: 4 }, color: '#fff' }}>
+          <Card
+            sx={{
+              height: '100%',
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardHeader
               title="USERS"
               subheader="17"
@@ -95,10 +124,16 @@ function AdminDashboard() {
             />
           </Card>
         </Grid>
-
         {/* RETURNS */}
         <Grid item xs={6} md={4} lg={2}>
-          <Card sx={{ height: '100%', bgcolor: '#2a2a2a', ':hover': { boxShadow: 4 }, color: '#fff' }}>
+          <Card
+            sx={{
+              height: '100%',
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardHeader
               title="RETURNS"
               subheader="2"
@@ -107,10 +142,16 @@ function AdminDashboard() {
             />
           </Card>
         </Grid>
-
         {/* COMMENTS */}
         <Grid item xs={6} md={4} lg={2}>
-          <Card sx={{ height: '100%', bgcolor: '#2a2a2a', ':hover': { boxShadow: 4 }, color: '#fff' }}>
+          <Card
+            sx={{
+              height: '100%',
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardHeader
               title="COMMENTS"
               subheader="5"
@@ -127,7 +168,16 @@ function AdminDashboard() {
           <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#ff9800', mb: 2 }}>
             Recent Orders
           </Typography>
-          <Card sx={{ mb: 2, bgcolor: '#2a2a2a', color: '#fff', ':hover': { boxShadow: 4 } }}>
+
+          {/* Example order #1 */}
+          <Card
+            sx={{
+              mb: 2,
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardContent>
               <Grid container alignItems="center" spacing={1}>
                 <Grid item xs={12} sm={4}>
@@ -144,12 +194,23 @@ function AdminDashboard() {
                   <Typography>$17.35</Typography>
                 </Grid>
                 <Grid item xs={12} sm={3} textAlign={{ sm: 'right' }}>
-                  <Typography variant="caption">Today - 13:20</Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    Today - 13:20
+                  </Typography>
                 </Grid>
               </Grid>
             </CardContent>
           </Card>
-          <Card sx={{ mb: 2, bgcolor: '#2a2a2a', color: '#fff', ':hover': { boxShadow: 4 } }}>
+
+          {/* Example order #2 */}
+          <Card
+            sx={{
+              mb: 2,
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardContent>
               <Grid container alignItems="center" spacing={1}>
                 <Grid item xs={12} sm={4}>
@@ -166,7 +227,9 @@ function AdminDashboard() {
                   <Typography>$145.20</Typography>
                 </Grid>
                 <Grid item xs={12} sm={3} textAlign={{ sm: 'right' }}>
-                  <Typography variant="caption">Today - 11:32</Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    Today - 11:32
+                  </Typography>
                 </Grid>
               </Grid>
             </CardContent>
@@ -178,7 +241,14 @@ function AdminDashboard() {
           <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#ff9800', mb: 2 }}>
             Performance
           </Typography>
-          <Card sx={{ height: 260, bgcolor: '#2a2a2a', color: '#fff', ':hover': { boxShadow: 4 } }}>
+          <Card
+            sx={{
+              height: 260,
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardContent
               sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}
             >
@@ -195,13 +265,21 @@ function AdminDashboard() {
           <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#ff9800', mb: 2 }}>
             Activity
           </Typography>
-          <Card sx={{ height: 300, bgcolor: '#2a2a2a', color: '#fff', overflowY: 'auto', ':hover': { boxShadow: 4 } }}>
+          <Card
+            sx={{
+              height: 300,
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              overflowY: 'auto',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardContent>
               <Box mb={2}>
                 <Typography variant="body2" sx={{ color: '#ff9800' }}>
                   • New user registration
                 </Typography>
-                <Typography variant="caption" sx={{ color: '#ccc' }}>
+                <Typography variant="caption" color="text.secondary">
                   18 Dec
                 </Typography>
               </Box>
@@ -209,7 +287,7 @@ function AdminDashboard() {
                 <Typography variant="body2" sx={{ color: '#ff9800' }}>
                   • 3 new products added
                 </Typography>
-                <Typography variant="caption" sx={{ color: '#ccc' }}>
+                <Typography variant="caption" color="text.secondary">
                   18 Dec
                 </Typography>
               </Box>
@@ -222,7 +300,15 @@ function AdminDashboard() {
           <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#ff9800', mb: 2 }}>
             Recent Reviews
           </Typography>
-          <Card sx={{ height: 300, bgcolor: '#2a2a2a', color: '#fff', overflowY: 'auto', ':hover': { boxShadow: 4 } }}>
+          <Card
+            sx={{
+              height: 300,
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              overflowY: 'auto',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardContent>
               <Box mb={2} sx={{ display: 'flex', gap: 2 }}>
                 <ReviewsIcon sx={{ color: '#ff9800', fontSize: 30 }} />
@@ -230,7 +316,7 @@ function AdminDashboard() {
                   <Typography variant="body2" sx={{ color: '#ff9800' }}>
                     Soda Bread
                   </Typography>
-                  <Typography variant="caption" sx={{ color: '#ccc' }}>
+                  <Typography variant="caption" color="text.secondary">
                     “Chocolate bar marzipan carrot cake gingerbread pastry...”
                   </Typography>
                   <Chip
@@ -251,7 +337,14 @@ function AdminDashboard() {
           <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#ff9800', mb: 2 }}>
             Tips
           </Typography>
-          <Card sx={{ width: { xs: '100%', md: 320 }, bgcolor: '#2a2a2a', color: '#fff', ':hover': { boxShadow: 4 } }}>
+          <Card
+            sx={{
+              width: { xs: '100%', md: 320 },
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardContent>
               <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#ff9800' }}>
                 More sales?
@@ -259,8 +352,9 @@ function AdminDashboard() {
               <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
                 Add new products!
               </Typography>
-              <Typography variant="body2" sx={{ mt: 1, color: '#ccc' }}>
-                Cheesecake chocolate carrot cake pie lollipop apple pie lemon cream lollipop. Oat cake lemon drops gummi pie cake cotton.
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                Cheesecake chocolate carrot cake pie lollipop apple pie lemon cream lollipop. Oat cake
+                lemon drops gummi pie cake cotton.
               </Typography>
               <Box mt={2}>
                 <Chip
@@ -279,4 +373,3 @@ function AdminDashboard() {
 }
 
 export default AdminDashboard;
-

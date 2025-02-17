@@ -1,3 +1,4 @@
+// src/layout/Footer.tsx
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
@@ -9,7 +10,7 @@ const Footer: React.FC = () => {
         textAlign: 'center',
         py: 2,
         mt: 'auto',
-        backgroundColor: 'background.paper',
+        bgcolor: 'background.paper',  // match the rest of the app
       }}
     >
       <Typography variant="body2" color="text.secondary">

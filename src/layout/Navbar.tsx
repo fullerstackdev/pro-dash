@@ -1,3 +1,4 @@
+// src/layout/Navbar.tsx
 import React from 'react';
 import { AppBar, Toolbar, Typography, Box, Button, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -18,7 +19,7 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
   };
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{ backgroundColor: 'background.paper', boxShadow: 2 }}>
       <Toolbar>
         {/* Toggle sidebar (mobile) */}
         <IconButton
@@ -31,12 +32,12 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
           <MenuIcon />
         </IconButton>
 
-        {/* Brand */}
+        {/* Brand or Logo */}
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          My Dash
+          Pro-Dash
         </Typography>
 
-        {/* Right side - if logged in, show Profile & Logout; else show Login */}
+        {/* Right side */}
         {isAuthenticated ? (
           <Box>
             <Button color="inherit" onClick={() => navigate('/account/edit')} sx={{ mr: 2 }}>

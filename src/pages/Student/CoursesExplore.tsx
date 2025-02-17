@@ -1,5 +1,3 @@
-// src/pages/Student/CoursesExplore.tsx
-
 import React from 'react';
 import {
   Box,
@@ -17,10 +15,9 @@ import ExploreIcon from '@mui/icons-material/Explore';
 import StarIcon from '@mui/icons-material/Star';
 
 /**
- * Dark-themed "CoursesExplore" page with consistent style:
- * - Dark background (#1e1e1e)
- * - Cards #2a2a2a
- * - White text, primary accents
+ * Version 1.1:
+ * - Use theme's background.default, background.paper, text.primary/secondary
+ * - Consistent card styling & hover effect
  */
 
 function CoursesExplore() {
@@ -103,7 +100,7 @@ function CoursesExplore() {
   ];
 
   return (
-    <Box sx={{ p: 3, bgcolor: '#1e1e1e', minHeight: '100vh', color: '#fff' }}>
+    <Box sx={{ p: 3, minHeight: '100vh' }}>
       {/* Page Title */}
       <Box display="flex" alignItems="center" mb={3}>
         <ExploreIcon sx={{ color: 'primary.main', fontSize: 32, mr: 1 }} />
@@ -111,7 +108,7 @@ function CoursesExplore() {
           <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
             Course Explore
           </Typography>
-          <Typography variant="body2" sx={{ color: '#ccc' }}>
+          <Typography variant="body2" color="text.secondary">
             Elearning Portal Course Explore Page
           </Typography>
         </Box>
@@ -126,7 +123,7 @@ function CoursesExplore() {
           variant="outlined"
           size="small"
           endIcon={<ArrowForwardIosIcon sx={{ fontSize: 12 }} />}
-          sx={{ color: '#fff', borderColor: '#ccc', textTransform: 'none' }}
+          sx={{ textTransform: 'none' }}
         >
           View All
         </Button>
@@ -139,8 +136,7 @@ function CoursesExplore() {
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                bgcolor: '#2a2a2a',
-                color: '#fff',
+                backgroundColor: 'background.paper',
                 ':hover': { boxShadow: 4 },
               }}
             >
@@ -162,18 +158,19 @@ function CoursesExplore() {
                     icon={<StarIcon fontSize="inherit" />}
                     emptyIcon={<StarIcon fontSize="inherit" sx={{ opacity: 0.4 }} />}
                   />
-                  <Typography variant="caption" sx={{ ml: 1, color: '#ccc' }}>
+                  <Typography variant="caption" sx={{ ml: 1 }} color="text.secondary">
                     ({course.ratingCount})
                   </Typography>
                 </Box>
                 <Box>
                   <Typography
                     variant="caption"
-                    sx={{ textDecoration: 'line-through', color: '#888' }}
+                    sx={{ textDecoration: 'line-through', mr: 1 }}
+                    color="text.secondary"
                   >
                     ${course.oldPrice.toFixed(2)}
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 'medium', ml: 1, display: 'inline' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 'medium', display: 'inline' }}>
                     ${course.price.toFixed(2)}
                   </Typography>
                 </Box>
@@ -183,7 +180,7 @@ function CoursesExplore() {
         ))}
       </Grid>
 
-      <Divider sx={{ my: 4, borderColor: '#444' }} />
+      <Divider sx={{ my: 4 }} />
 
       {/* Trending Section */}
       <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
@@ -194,7 +191,7 @@ function CoursesExplore() {
           variant="outlined"
           size="small"
           endIcon={<ArrowForwardIosIcon sx={{ fontSize: 12 }} />}
-          sx={{ color: '#fff', borderColor: '#ccc', textTransform: 'none' }}
+          sx={{ textTransform: 'none' }}
         >
           View All
         </Button>
@@ -207,8 +204,7 @@ function CoursesExplore() {
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                bgcolor: '#2a2a2a',
-                color: '#fff',
+                backgroundColor: 'background.paper',
                 ':hover': { boxShadow: 4 },
               }}
             >
@@ -230,18 +226,19 @@ function CoursesExplore() {
                     icon={<StarIcon fontSize="inherit" />}
                     emptyIcon={<StarIcon fontSize="inherit" sx={{ opacity: 0.4 }} />}
                   />
-                  <Typography variant="caption" sx={{ ml: 1, color: '#ccc' }}>
+                  <Typography variant="caption" sx={{ ml: 1 }} color="text.secondary">
                     ({course.ratingCount})
                   </Typography>
                 </Box>
                 <Box>
                   <Typography
                     variant="caption"
-                    sx={{ textDecoration: 'line-through', color: '#888' }}
+                    sx={{ textDecoration: 'line-through', mr: 1 }}
+                    color="text.secondary"
                   >
                     ${course.oldPrice.toFixed(2)}
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 'medium', ml: 1, display: 'inline' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 'medium', display: 'inline' }}>
                     ${course.price.toFixed(2)}
                   </Typography>
                 </Box>

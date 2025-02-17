@@ -1,25 +1,36 @@
-// src/pages/Admin/SupportTicketList.tsx
-
 import React from 'react';
 import { Box, Typography, Card, CardContent, Chip, Grid, Button } from '@mui/material';
 import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 
+/**
+ * Admin SupportTicketList, v1.2:
+ * - Dark background, paper card
+ * - Orange accent
+ */
+
 function SupportTicketList() {
   return (
-    <Box sx={{ p: 3, bgcolor: '#1e1e1e', minHeight: '100vh', color: '#fff' }}>
+    <Box sx={{ p: 3, minHeight: '100vh' }}>
       <Box display="flex" alignItems="center" mb={3}>
         <ConfirmationNumberIcon sx={{ color: '#ff9800', fontSize: 32, mr: 1 }} />
         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ff9800' }}>
           Support Ticket List
         </Typography>
       </Box>
-      <Typography variant="body2" sx={{ color: '#ccc', mb: 3 }}>
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
         View or filter support tickets submitted by users.
       </Typography>
 
-      {/* Example ticket */}
-      <Card sx={{ mb: 2, bgcolor: '#2a2a2a', ':hover': { boxShadow: 4 }, color: '#fff' }}>
+      {/* Example Ticket */}
+      <Card
+        sx={{
+          mb: 2,
+          backgroundColor: 'background.paper',
+          color: 'text.primary',
+          ':hover': { boxShadow: 4 },
+        }}
+      >
         <CardContent>
           <Grid container alignItems="center" spacing={1}>
             <Grid item xs={12} sm={4}>
@@ -28,10 +39,14 @@ function SupportTicketList() {
               </Typography>
             </Grid>
             <Grid item xs={6} sm={3}>
-              <Chip label="Open" sx={{ color: '#ff9800', borderColor: '#ff9800' }} variant="outlined" />
+              <Chip
+                label="Open"
+                variant="outlined"
+                sx={{ color: '#ff9800', borderColor: '#ff9800' }}
+              />
             </Grid>
             <Grid item xs={6} sm={3}>
-              <Typography variant="body2" sx={{ color: '#ccc' }}>
+              <Typography variant="body2" color="text.secondary">
                 2025-03-10
               </Typography>
             </Grid>
@@ -48,7 +63,7 @@ function SupportTicketList() {
           </Grid>
         </CardContent>
       </Card>
-      {/* Repeat for more tickets */}
+      {/* Repeat more tickets as needed */}
     </Box>
   );
 }

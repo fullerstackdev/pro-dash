@@ -1,5 +1,3 @@
-// src/pages/Admin/Customers/CustomersDetail.tsx
-
 import React, { useState } from 'react';
 import {
   Box,
@@ -58,15 +56,11 @@ function TagsInput() {
           onChange={(e) => setNewTag(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleAddTag()}
           sx={{
-            '& .MuiOutlinedInput-root': { color: '#fff', bgcolor: '#333' },
-            '& .MuiFormLabel-root': { color: '#ccc' },
+            '& .MuiOutlinedInput-root': { bgcolor: '#333', color: 'text.primary' },
+            '& .MuiFormLabel-root': { color: 'text.secondary' },
           }}
         />
-        <Button
-          variant="outlined"
-          sx={{ color: '#ff9800', borderColor: '#ff9800' }}
-          onClick={handleAddTag}
-        >
+        <Button variant="outlined" sx={{ color: '#ff9800', borderColor: '#ff9800' }} onClick={handleAddTag}>
           Add
         </Button>
       </Box>
@@ -82,7 +76,7 @@ function CustomersDetail() {
   const handleMenuClose = () => setAnchorEl(null);
 
   return (
-    <Box sx={{ p: 3, bgcolor: '#1e1e1e', minHeight: '100vh', color: '#fff' }}>
+    <Box sx={{ p: 3, minHeight: '100vh' }}>
       <Box display="flex" alignItems="center" mb={3}>
         <PeopleIcon sx={{ color: '#ff9800', fontSize: 32, mr: 1 }} />
         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ff9800' }}>
@@ -95,7 +89,14 @@ function CustomersDetail() {
           <Typography variant="h6" mb={2} sx={{ color: '#ff9800' }}>
             Info
           </Typography>
-          <Card sx={{ mb: 2, bgcolor: '#2a2a2a', ':hover': { boxShadow: 4 }, color: '#fff' }}>
+          <Card
+            sx={{
+              mb: 2,
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardContent>
               {/* Basic Info */}
               <Box textAlign="center" mb={3}>
@@ -117,7 +118,7 @@ function CustomersDetail() {
                   BC
                 </Box>
                 <Typography variant="h5">Blaine Cottrell</Typography>
-                <Typography variant="caption" sx={{ color: '#ccc' }}>
+                <Typography variant="caption" color="text.secondary">
                   Montreal, Canada
                 </Typography>
               </Box>
@@ -163,35 +164,48 @@ function CustomersDetail() {
                   <Typography>17</Typography>
                 </Box>
               </Box>
-
-              {/* Shipping/Billing addresses omitted for brevity—same styling */}
             </CardContent>
           </Card>
         </Grid>
 
         <Grid item xs={12} xl={8}>
-          {/* Additional Panels: Recent Orders, History, Additional Info, etc. */}
+          {/* History */}
           <Typography variant="h6" mb={2} sx={{ color: '#ff9800' }}>
             History
           </Typography>
-          <Card sx={{ bgcolor: '#2a2a2a', color: '#fff', ':hover': { boxShadow: 4 }, mb: 3 }}>
+          <Card
+            sx={{
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+              mb: 3,
+            }}
+          >
             <CardContent>
               <Typography variant="subtitle1" sx={{ color: '#ff9800' }}>
                 New Order
               </Typography>
-              <Typography variant="caption" sx={{ color: '#ccc' }}>
+              <Typography variant="caption" color="text.secondary">
                 21.12.2021
               </Typography>
-              <Typography variant="body2" sx={{ color: '#ddd', mt: 1 }}>
-                Jujubes tootsie roll liquorice cake jelly beans pudding gummi bears chocolate cake donut...
+              <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
+                Jujubes tootsie roll liquorice cake jelly beans pudding gummi bears chocolate cake
+                donut...
               </Typography>
             </CardContent>
           </Card>
 
+          {/* Additional Info */}
           <Typography variant="h6" mb={2} sx={{ color: '#ff9800' }}>
             Additional Info
           </Typography>
-          <Card sx={{ bgcolor: '#2a2a2a', color: '#fff', ':hover': { boxShadow: 4 } }}>
+          <Card
+            sx={{
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              ':hover': { boxShadow: 4 },
+            }}
+          >
             <CardContent>
               <Box mb={3}>
                 <Typography variant="body2" sx={{ mb: 1 }}>
@@ -211,8 +225,8 @@ function CustomersDetail() {
                   onChange={(e) => setNotes(e.target.value)}
                   variant="outlined"
                   sx={{
-                    '& .MuiOutlinedInput-root': { color: '#fff', bgcolor: '#333' },
-                    '& .MuiFormLabel-root': { color: '#ccc' },
+                    '& .MuiOutlinedInput-root': { bgcolor: '#333', color: 'text.primary' },
+                    '& .MuiFormLabel-root': { color: 'text.secondary' },
                   }}
                 />
               </Box>
@@ -220,7 +234,11 @@ function CustomersDetail() {
           </Card>
 
           <Box textAlign="right" mt={2}>
-            <Button variant="outlined" startIcon={<SaveIcon />} sx={{ color: '#ff9800', borderColor: '#ff9800' }}>
+            <Button
+              variant="outlined"
+              startIcon={<SaveIcon />}
+              sx={{ color: '#ff9800', borderColor: '#ff9800' }}
+            >
               Update
             </Button>
           </Box>
