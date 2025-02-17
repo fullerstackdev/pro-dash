@@ -1,43 +1,45 @@
 // src/layout/MainLayout.tsx
 
-import React from 'react';
-import { useAuth } from '../context/AuthContext'; // Or however you track roles
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
+import { useAuth } from '../context/AuthContext';
 
-
-/**
- * A single layout that shows either the Student sidebar/header or Admin sidebar/header
- * based on the user's role. Keeps your single-level route structure the same.
- */
+import Navbar from '../layout/Navbar';
+import Sidebar from '../layout/Sidebar';
+import Footer from '../layout/Footer';
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
 function MainLayout({ children }: MainLayoutProps) {
-  const { user } = useAuth(); 
-  // Suppose 'user' has { role: 'student' | 'admin' }
+  const { isAuthenticated } = useAuth();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (!user) {
-    // Not logged in or no role? Could show nothing or a loading screen
-    return null;
+  // If you prefer to show a placeholder or redirect if not logged in:
+  if (!isAuthenticated) {
+    return null; // or <Navigate to="/login" />, etc.
   }
 
-  const isAdmin = user.role === 'admin';
+  const handleToggleSidebar = () => {
+    setSidebarOpen((prev) => !prev);
+  };
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#1e1e1e' }}>
-      {/* Sidebar */}
-      {isAdmin ? <AdminSidebar /> : <StudentSidebar />}
+    <Box display="flex" flexDirection="column" minHeight="100vh" bgcolor="background.default">
+      {/* Top Navbar */}
+      <Navbar onToggleSidebar={handleToggleSidebar} />
 
-      {/* Main Content & Header */}
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        {isAdmin ? <AdminHeader /> : <StudentHeader />}
+      {/* Sidebar Drawer */}
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-        <Box component="main" sx={{ flexGrow: 1, p: 3, color: '#fff' }}>
-          {children}
-        </Box>
+      {/* Main Content Area */}
+      <Box component="main" sx={{ flex: 1, ml: { md: '240px' }, p: 2 }}>
+        {children}
       </Box>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 }
