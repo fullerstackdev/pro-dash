@@ -1,11 +1,17 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 interface ProtectedRouteProps {
-  children: JSX.Element;
+  isAllowed: boolean;
+  redirectPath: string;
+  children: React.ReactElement;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  // For development purposes, we're bypassing authentication checks.
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ isAllowed, redirectPath, children }) => {
+  if (!isAllowed) {
+    return <Navigate to={redirectPath} replace />;
+  }
+
   return children;
 };
 

@@ -11,6 +11,7 @@ interface AuthContextProps {
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  register: (email: string, password: string) => Promise<void>;
   loading: boolean;
 }
 
@@ -19,6 +20,7 @@ const AuthContext = createContext<AuthContextProps>({
   isAuthenticated: false,
   login: async () => {},
   logout: () => {},
+  register: async () => {},
   loading: false,
 });
 
@@ -46,6 +48,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLoading(false);
   };
 
+  const register = async (email: string, password: string) => {
+    setLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 500)); // fake delay
+    const fakeUser: User = {
+      id: '456',
+      email,
+      role: 'user',
+    };
+    setUser(fakeUser);
+    localStorage.setItem('proDashUser', JSON.stringify(fakeUser));
+    setLoading(false);
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem('proDashUser');
@@ -56,6 +71,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     isAuthenticated: !!user,
     login,
     logout,
+    register,
     loading,
   };
 
