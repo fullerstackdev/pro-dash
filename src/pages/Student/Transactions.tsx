@@ -1,3 +1,4 @@
+// v1.3 - Transactions.tsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -19,6 +20,7 @@ import {
 } from '@mui/material';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import PaymentIcon from '@mui/icons-material/Payment';
+import PageContainer from '../../layout/PageContainer';
 
 type TransactionRecord = {
   id: number;
@@ -27,12 +29,6 @@ type TransactionRecord = {
   status: string;
   date: string;
 };
-
-/**
- * Version 1.1:
- * - Use theme's background, card styling
- * - Removed leftover references to other inline colors
- */
 
 function Transactions() {
   const [transactions, setTransactions] = useState<TransactionRecord[]>([
@@ -74,23 +70,18 @@ function Transactions() {
     if (status === 'Completed') color = 'success';
     if (status === 'Pending') color = 'warning';
     if (status === 'Failed') color = 'error';
-
     return <Chip label={status} color={color} size="small" />;
   };
 
   return (
-    <Box sx={{ p: 3, minHeight: '100vh' }}>
-      <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2, color: 'primary.main' }}>
-        Transactions
-      </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
-        View deposit/withdraw history, and manage new transactions.
-      </Typography>
-
+    <PageContainer
+      title="Transactions"
+      subtitle="View deposit/withdraw history, and manage new transactions."
+      icon={<AccountBalanceWalletIcon sx={{ color: 'primary.main', fontSize: 32 }} />}
+    >
       <Grid container spacing={3}>
-        {/* Left Column: transaction forms */}
         <Grid item xs={12} md={4}>
-          <Card sx={{ mb: 3, backgroundColor: 'background.paper', ':hover': { boxShadow: 4 } }}>
+          <Card sx={{ mb: 3 }}>
             <CardHeader
               title="Deposit Funds"
               avatar={<AccountBalanceWalletIcon color="primary" />}
@@ -106,13 +97,13 @@ function Transactions() {
                 value={depositAmount}
                 onChange={(e) => setDepositAmount(e.target.value)}
               />
-              <Button variant="contained" onClick={handleDeposit} disabled={!depositAmount}>
+              <Button variant="contained" color="primary" onClick={handleDeposit} disabled={!depositAmount}>
                 Deposit
               </Button>
             </CardContent>
           </Card>
 
-          <Card sx={{ backgroundColor: 'background.paper', ':hover': { boxShadow: 4 } }}>
+          <Card>
             <CardHeader
               title="Withdraw Funds"
               avatar={<PaymentIcon color="primary" />}
@@ -128,20 +119,17 @@ function Transactions() {
                 value={withdrawAmount}
                 onChange={(e) => setWithdrawAmount(e.target.value)}
               />
-              <Button variant="contained" onClick={handleWithdraw} disabled={!withdrawAmount}>
+              <Button variant="contained" color="primary" onClick={handleWithdraw} disabled={!withdrawAmount}>
                 Withdraw
               </Button>
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Right Column: transaction history table */}
+        {/* Transaction History */}
         <Grid item xs={12} md={8}>
-          <Card sx={{ backgroundColor: 'background.paper', ':hover': { boxShadow: 4 } }}>
-            <CardHeader
-              title="Transaction History"
-              subheader="All deposits and withdrawals"
-            />
+          <Card>
+            <CardHeader title="Transaction History" subheader="All deposits and withdrawals" />
             <CardContent>
               <TableContainer component={Paper}>
                 <Table size="small">
@@ -169,7 +157,7 @@ function Transactions() {
           </Card>
         </Grid>
       </Grid>
-    </Box>
+    </PageContainer>
   );
 }
 

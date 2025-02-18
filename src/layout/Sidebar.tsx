@@ -1,27 +1,21 @@
-// src/layout/Sidebar.tsx
-import React from 'react';
+// v1.3 - Sidebar.tsx
+import React, { useState } from 'react';
 import {
   Drawer,
   Box,
+  Typography,
+  Avatar,
+  Divider,
   List,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   Collapse,
   useMediaQuery,
   Theme,
 } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import SchoolIcon from '@mui/icons-material/School';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import ChatIcon from '@mui/icons-material/Chat';
-import EventIcon from '@mui/icons-material/Event';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 
 type SidebarProps = {
@@ -33,10 +27,16 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
   const navigate = useNavigate();
   const isDesktop = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
 
-  // For collapsible submenus, we can track expanded sections in state:
-  const [openStudent, setOpenStudent] = React.useState(false);
-  const [openAdmin, setOpenAdmin] = React.useState(false);
-  const [openApps, setOpenApps] = React.useState(false);
+  // Collapsible states
+  const [openStudent, setOpenStudent] = useState(true);
+  const [openAdmin, setOpenAdmin] = useState(false);
+  const [openApps, setOpenApps] = useState(false);
+
+  const handleToggle = (panel: 'student' | 'admin' | 'apps') => {
+    if (panel === 'student') setOpenStudent((prev) => !prev);
+    if (panel === 'admin') setOpenAdmin((prev) => !prev);
+    if (panel === 'apps') setOpenApps((prev) => !prev);
+  };
 
   const handleNav = (path: string) => {
     navigate(path);
@@ -44,161 +44,119 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
   };
 
   const drawerContent = (
-    <Box sx={{ width: 240, bgcolor: 'background.paper', height: '100%' }}>
-      <List component="nav" sx={{ pt: 2 }}>
-        {/* STUDENT */}
-        <ListItemButton onClick={() => setOpenStudent(!openStudent)}>
-          <ListItemIcon>
-            <SchoolIcon sx={{ color: 'primary.main' }} />
-          </ListItemIcon>
+    <Box sx={{ width: 240, bgcolor: 'background.paper', height: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* Brand */}
+      <Box sx={{ p: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Avatar sx={{ bgcolor: 'secondary.main' }}>A</Avatar>
+        <Typography variant="h6" sx={{ color: 'secondary.main', fontWeight: 'bold' }}>
+          Athlio
+        </Typography>
+      </Box>
+
+      {/* User Info */}
+      <Box sx={{ px: 2, pb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+        <AccountCircleIcon sx={{ color: 'primary.main' }} />
+        <Typography variant="body2" sx={{ color: 'text.primary' }}>
+          Hello, John Doe
+        </Typography>
+      </Box>
+      <Divider />
+
+      {/* Navigation Sections */}
+      <List disablePadding sx={{ flexGrow: 1 }}>
+        {/* Student */}
+        <ListItemButton onClick={() => handleToggle('student')}>
           <ListItemText primary="Student" />
-          {openStudent ? <ArrowDropDownIcon /> : <ArrowRightIcon />}
+          {openStudent ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </ListItemButton>
         <Collapse in={openStudent} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding sx={{ pl: 4 }}>
+          <Box sx={{ pl: 3 }}>
             <ListItemButton onClick={() => handleNav('/student/dashboard')}>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/student/courses-explore')}>
-              <ListItemIcon>
-                <SchoolIcon />
-              </ListItemIcon>
               <ListItemText primary="Courses Explore" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/student/courses-detail')}>
-              <ListItemIcon>
-                <SchoolIcon />
-              </ListItemIcon>
               <ListItemText primary="Courses Detail" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/student/transactions')}>
-              <ListItemIcon>
-                <AttachMoneyIcon />
-              </ListItemIcon>
               <ListItemText primary="Transactions" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/student/bets')}>
-              <ListItemIcon>
-                <SportsEsportsIcon />
-              </ListItemIcon>
               <ListItemText primary="Bets" />
             </ListItemButton>
-          </List>
+          </Box>
         </Collapse>
 
-        {/* ADMIN */}
-        <ListItemButton onClick={() => setOpenAdmin(!openAdmin)}>
-          <ListItemIcon>
-            <AdminPanelSettingsIcon sx={{ color: 'primary.main' }} />
-          </ListItemIcon>
+        {/* Admin */}
+        <ListItemButton onClick={() => handleToggle('admin')}>
           <ListItemText primary="Admin" />
-          {openAdmin ? <ArrowDropDownIcon /> : <ArrowRightIcon />}
+          {openAdmin ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </ListItemButton>
         <Collapse in={openAdmin} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding sx={{ pl: 4 }}>
+          <Box sx={{ pl: 3 }}>
             <ListItemButton onClick={() => handleNav('/admin/dashboard')}>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/admin/customers-list')}>
-              <ListItemIcon>
-                <ManageAccountsIcon />
-              </ListItemIcon>
               <ListItemText primary="Customers List" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/admin/customers-detail')}>
-              <ListItemIcon>
-                <ManageAccountsIcon />
-              </ListItemIcon>
               <ListItemText primary="Customers Detail" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/admin/manage-courses')}>
-              <ListItemIcon>
-                <SchoolIcon />
-              </ListItemIcon>
               <ListItemText primary="Manage Courses" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/admin/courses-detail')}>
-              <ListItemIcon>
-                <SchoolIcon />
-              </ListItemIcon>
               <ListItemText primary="Courses Detail" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/admin/invoice')}>
-              <ListItemIcon>
-                <AttachMoneyIcon />
-              </ListItemIcon>
               <ListItemText primary="Invoice" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/admin/support-tickets')}>
-              <ListItemIcon>
-                <SupportAgentIcon />
-              </ListItemIcon>
               <ListItemText primary="Support Tickets" />
             </ListItemButton>
-          </List>
+          </Box>
         </Collapse>
 
-        {/* APPS */}
-        <ListItemButton onClick={() => setOpenApps(!openApps)}>
-          <ListItemIcon>
-            <ChatIcon sx={{ color: 'primary.main' }} />
-          </ListItemIcon>
+        {/* Apps */}
+        <ListItemButton onClick={() => handleToggle('apps')}>
           <ListItemText primary="Apps" />
-          {openApps ? <ArrowDropDownIcon /> : <ArrowRightIcon />}
+          {openApps ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </ListItemButton>
         <Collapse in={openApps} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding sx={{ pl: 4 }}>
+          <Box sx={{ pl: 3 }}>
             <ListItemButton onClick={() => handleNav('/apps/chat')}>
-              <ListItemIcon>
-                <ChatIcon />
-              </ListItemIcon>
               <ListItemText primary="Chat" />
             </ListItemButton>
             <ListItemButton onClick={() => handleNav('/apps/calendar')}>
-              <ListItemIcon>
-                <EventIcon />
-              </ListItemIcon>
               <ListItemText primary="Calendar" />
             </ListItemButton>
-          </List>
+          </Box>
         </Collapse>
       </List>
+
+      {/* Sidebar Footer / Version */}
+      <Box sx={{ p: 2, textAlign: 'center' }}>
+        <Typography variant="caption" color="text.secondary">
+          v1.3.0
+        </Typography>
+      </Box>
     </Box>
   );
 
   if (isDesktop) {
     return (
-      <Drawer
-        variant="permanent"
-        open
-        anchor="left"
-        sx={{
-          width: 240,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': { width: 240, boxSizing: 'border-box', bgcolor: 'background.paper' },
-        }}
-      >
+      <Drawer variant="permanent" anchor="left" open sx={{ width: 240 }}>
         {drawerContent}
       </Drawer>
     );
   }
 
+  // Mobile
   return (
-    <Drawer
-      variant="temporary"
-      open={isOpen}
-      onClose={onClose}
-      anchor="left"
-      sx={{
-        '& .MuiDrawer-paper': { width: 240, boxSizing: 'border-box', bgcolor: 'background.paper' },
-      }}
-    >
+    <Drawer open={isOpen} onClose={onClose} anchor="left" sx={{ '& .MuiDrawer-paper': { width: 240 } }}>
       {drawerContent}
     </Drawer>
   );

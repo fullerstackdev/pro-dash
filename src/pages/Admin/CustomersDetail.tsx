@@ -1,3 +1,4 @@
+// v1.3 - CustomersDetail.tsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -11,6 +12,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Divider,
 } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import PinDropIcon from '@mui/icons-material/PinDrop';
@@ -20,6 +22,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SaveIcon from '@mui/icons-material/Save';
 import PeopleIcon from '@mui/icons-material/People';
+import PageContainer from '../../layout/PageContainer';
 
 function TagsInput() {
   const [tags, setTags] = useState(['Rates', 'Sales Shopper', 'Newsletter']);
@@ -32,7 +35,7 @@ function TagsInput() {
     setNewTag('');
   };
   const handleRemoveTag = (tag: string) => {
-    setTags(tags.filter((t) => t !== tag));
+    setTags((prev) => prev.filter((t) => t !== tag));
   };
 
   return (
@@ -43,7 +46,7 @@ function TagsInput() {
             key={tag}
             label={tag}
             onDelete={() => handleRemoveTag(tag)}
-            sx={{ color: '#ff9800', borderColor: '#ff9800' }}
+            sx={{ color: 'secondary.main', borderColor: 'secondary.main' }}
             variant="outlined"
           />
         ))}
@@ -56,11 +59,10 @@ function TagsInput() {
           onChange={(e) => setNewTag(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleAddTag()}
           sx={{
-            '& .MuiOutlinedInput-root': { bgcolor: '#333', color: 'text.primary' },
-            '& .MuiFormLabel-root': { color: 'text.secondary' },
+            '& .MuiOutlinedInput-root': { bgcolor: 'background.paper' },
           }}
         />
-        <Button variant="outlined" sx={{ color: '#ff9800', borderColor: '#ff9800' }} onClick={handleAddTag}>
+        <Button variant="outlined" sx={{ color: 'secondary.main', borderColor: 'secondary.main' }} onClick={handleAddTag}>
           Add
         </Button>
       </Box>
@@ -76,36 +78,25 @@ function CustomersDetail() {
   const handleMenuClose = () => setAnchorEl(null);
 
   return (
-    <Box sx={{ p: 3, minHeight: '100vh' }}>
-      <Box display="flex" alignItems="center" mb={3}>
-        <PeopleIcon sx={{ color: '#ff9800', fontSize: 32, mr: 1 }} />
-        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ff9800' }}>
-          Customer Detail
-        </Typography>
-      </Box>
-
+    <PageContainer
+      title="Customer Detail"
+      subtitle="Edit permissions, advanced customer settings, etc."
+      icon={<PeopleIcon sx={{ color: 'secondary.main', fontSize: 32 }} />}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} xl={4}>
-          <Typography variant="h6" mb={2} sx={{ color: '#ff9800' }}>
+          <Typography variant="h6" mb={2} sx={{ color: 'secondary.main' }}>
             Info
           </Typography>
-          <Card
-            sx={{
-              mb: 2,
-              backgroundColor: 'background.paper',
-              color: 'text.primary',
-              ':hover': { boxShadow: 4 },
-            }}
-          >
+          <Card sx={{ mb: 2 }}>
             <CardContent>
-              {/* Basic Info */}
               <Box textAlign="center" mb={3}>
                 <Box
                   sx={{
                     width: 60,
                     height: 60,
                     borderRadius: '50%',
-                    backgroundColor: '#ff9800',
+                    backgroundColor: 'secondary.main',
                     color: '#fff',
                     mx: 'auto',
                     mb: 1,
@@ -113,24 +104,25 @@ function CustomersDetail() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontWeight: 'bold',
+                    fontSize: 18,
                   }}
                 >
                   BC
                 </Box>
                 <Typography variant="h5">Blaine Cottrell</Typography>
-                <Typography variant="caption" color="text.secondary">
+                <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                   Montreal, Canada
                 </Typography>
               </Box>
 
               <Box display="flex" justifyContent="center" gap={1} mb={3}>
-                <Button variant="contained" sx={{ bgcolor: '#ff9800', ':hover': { bgcolor: '#e59100' } }}>
+                <Button variant="contained" sx={{ bgcolor: 'secondary.main', ':hover': { bgcolor: '#e59100' } }}>
                   Edit
                 </Button>
-                <Button variant="outlined" sx={{ color: '#ff9800', borderColor: '#ff9800' }}>
+                <Button variant="outlined" sx={{ color: 'secondary.main', borderColor: 'secondary.main' }}>
                   Block
                 </Button>
-                <IconButton onClick={handleMenuOpen} sx={{ color: '#ff9800' }}>
+                <IconButton onClick={handleMenuOpen} sx={{ color: 'secondary.main' }}>
                   <MoreHorizIcon />
                 </IconButton>
                 <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
@@ -143,69 +135,57 @@ function CustomersDetail() {
               {/* Stats */}
               <Box mb={2}>
                 <Box display="flex" alignItems="center" mb={1}>
-                  <InventoryIcon sx={{ mr: 1, color: '#ff9800' }} />
+                  <InventoryIcon sx={{ mr: 1, color: 'secondary.main' }} />
                   <Typography variant="body2" sx={{ flexGrow: 1 }}>
                     Lifetime Spent
                   </Typography>
                   <Typography>$5,325.55</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" mb={1}>
-                  <ShoppingCartIcon sx={{ mr: 1, color: '#ff9800' }} />
+                  <ShoppingCartIcon sx={{ mr: 1, color: 'secondary.main' }} />
                   <Typography variant="body2" sx={{ flexGrow: 1 }}>
                     Average Order
                   </Typography>
                   <Typography>$590.50</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" mb={1}>
-                  <InventoryIcon sx={{ mr: 1, color: '#ff9800' }} />
+                  <InventoryIcon sx={{ mr: 1, color: 'secondary.main' }} />
                   <Typography variant="body2" sx={{ flexGrow: 1 }}>
                     Order Count
                   </Typography>
                   <Typography>17</Typography>
                 </Box>
               </Box>
+
+              <Divider sx={{ my: 2 }} />
+
+              {/* For brevity: shipping/billing addresses if needed */}
             </CardContent>
           </Card>
         </Grid>
 
         <Grid item xs={12} xl={8}>
-          {/* History */}
-          <Typography variant="h6" mb={2} sx={{ color: '#ff9800' }}>
+          <Typography variant="h6" mb={2} sx={{ color: 'secondary.main' }}>
             History
           </Typography>
-          <Card
-            sx={{
-              backgroundColor: 'background.paper',
-              color: 'text.primary',
-              ':hover': { boxShadow: 4 },
-              mb: 3,
-            }}
-          >
+          <Card sx={{ mb: 3 }}>
             <CardContent>
-              <Typography variant="subtitle1" sx={{ color: '#ff9800' }}>
+              <Typography variant="subtitle1" sx={{ color: 'secondary.main' }}>
                 New Order
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                 21.12.2021
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
-                Jujubes tootsie roll liquorice cake jelly beans pudding gummi bears chocolate cake
-                donut...
+              <Typography variant="body2" sx={{ color: 'text.primary', mt: 1 }}>
+                Jujubes tootsie roll liquorice cake jelly beans pudding gummi bears chocolate cake donut...
               </Typography>
             </CardContent>
           </Card>
 
-          {/* Additional Info */}
-          <Typography variant="h6" mb={2} sx={{ color: '#ff9800' }}>
+          <Typography variant="h6" mb={2} sx={{ color: 'secondary.main' }}>
             Additional Info
           </Typography>
-          <Card
-            sx={{
-              backgroundColor: 'background.paper',
-              color: 'text.primary',
-              ':hover': { boxShadow: 4 },
-            }}
-          >
+          <Card>
             <CardContent>
               <Box mb={3}>
                 <Typography variant="body2" sx={{ mb: 1 }}>
@@ -225,8 +205,7 @@ function CustomersDetail() {
                   onChange={(e) => setNotes(e.target.value)}
                   variant="outlined"
                   sx={{
-                    '& .MuiOutlinedInput-root': { bgcolor: '#333', color: 'text.primary' },
-                    '& .MuiFormLabel-root': { color: 'text.secondary' },
+                    '& .MuiOutlinedInput-root': { bgcolor: 'background.paper' },
                   }}
                 />
               </Box>
@@ -234,17 +213,13 @@ function CustomersDetail() {
           </Card>
 
           <Box textAlign="right" mt={2}>
-            <Button
-              variant="outlined"
-              startIcon={<SaveIcon />}
-              sx={{ color: '#ff9800', borderColor: '#ff9800' }}
-            >
+            <Button variant="outlined" startIcon={<SaveIcon />} sx={{ color: 'secondary.main', borderColor: 'secondary.main' }}>
               Update
             </Button>
           </Box>
         </Grid>
       </Grid>
-    </Box>
+    </PageContainer>
   );
 }
 

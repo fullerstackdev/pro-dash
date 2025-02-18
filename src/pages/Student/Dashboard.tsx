@@ -1,3 +1,4 @@
+// v1.3 - Dashboard.tsx
 import React from 'react';
 import {
   Box,
@@ -7,22 +8,12 @@ import {
   CardMedia,
   CardContent,
   LinearProgress,
+  Rating,
   Divider,
   Button,
-  Rating,
 } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import DonutSmallIcon from '@mui/icons-material/DonutSmall';
-import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
-
-/**
- * Version 1.1: 
- * - Removed inline #1e1e1e or #2a2a2a
- * - Uses theme background (background.default) and paper (background.paper)
- * - text.primary, text.secondary, primary.main for accents
- */
+import PageContainer from '../../layout/PageContainer';
 
 function Dashboard() {
   const continueLearning = [
@@ -47,76 +38,45 @@ function Dashboard() {
   ];
 
   return (
-    <Box sx={{ p: 3, minHeight: '100vh' /* uses theme.palette.background.default */ }}>
-      {/* Title Row */}
-      <Box display="flex" alignItems="center" mb={3}>
-        <DashboardIcon sx={{ color: 'primary.main', fontSize: 32, mr: 1 }} />
-        <Box>
-          <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-            E-learning Dashboard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Elearning Portal E-learning Dashboard Page
-          </Typography>
-        </Box>
-      </Box>
-
+    <PageContainer
+      title="E-learning Dashboard"
+      subtitle="Elearning Portal E-learning Dashboard Page"
+      icon={<DashboardIcon sx={{ color: 'primary.main', fontSize: 32 }} />}
+    >
       <Grid container spacing={3}>
-        {/* Left Column: Continue Learning & Achievements */}
+        {/* Left Column (Continue Learning, Achievements) */}
         <Grid item xs={12} lg={8}>
-          {/* Continue Learning */}
           <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2, color: 'primary.main' }}>
             Continue Learning
           </Typography>
           {continueLearning.map((course) => (
-            <Card
-              key={course.id}
-              sx={{
-                display: 'flex',
-                mb: 2,
-                backgroundColor: 'background.paper',
-                ':hover': { boxShadow: 4 },
-              }}
-            >
-              <CardMedia
-                component="img"
-                image={course.image}
-                alt={course.title}
-                sx={{ width: 120, objectFit: 'cover' }}
-              />
-              <CardContent sx={{ flex: 1 }}>
-                <Typography variant="subtitle1" sx={{ fontWeight: 'medium' }}>
-                  {course.title}
-                </Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-                  <LinearProgress
-                    variant="determinate"
-                    value={course.progress}
-                    sx={{ flexGrow: 1, mr: 2 }}
-                  />
-                  <Typography variant="body2" color="text.secondary">
-                    {course.progress}%
+            <Card key={course.id} sx={{ mb: 2 }}>
+              <Box sx={{ display: 'flex' }}>
+                <CardMedia
+                  component="img"
+                  image={course.image}
+                  alt={course.title}
+                  sx={{ width: 120, objectFit: 'cover' }}
+                />
+                <CardContent sx={{ flex: 1 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 'medium', mb: 1 }}>
+                    {course.title}
                   </Typography>
-                </Box>
-              </CardContent>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <LinearProgress variant="determinate" value={course.progress} sx={{ flexGrow: 1, mr: 2 }} />
+                    <Typography variant="body2">{course.progress}%</Typography>
+                  </Box>
+                </CardContent>
+              </Box>
             </Card>
           ))}
 
           {/* Achievements */}
-          <Typography variant="h6" sx={{ fontWeight: 'bold', mt: 4, mb: 2, color: 'primary.main' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', my: 2, color: 'primary.main' }}>
             Achievements
           </Typography>
           <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto', pb: 2 }}>
-            {/* Example Achievements */}
-            <Card
-              sx={{
-                minWidth: 140,
-                flexShrink: 0,
-                textAlign: 'center',
-                backgroundColor: 'background.paper',
-                ':hover': { boxShadow: 4 },
-              }}
-            >
+            <Card sx={{ minWidth: 140, textAlign: 'center', flexShrink: 0 }}>
               <CardContent>
                 <Box
                   sx={{
@@ -131,7 +91,9 @@ function Dashboard() {
                     justifyContent: 'center',
                   }}
                 >
-                  <EmojiEventsIcon sx={{ color: 'primary.main' }} />
+                  <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+                    SN
+                  </Typography>
                 </Box>
                 <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
                   Sandwich Novice
@@ -141,16 +103,7 @@ function Dashboard() {
                 </Typography>
               </CardContent>
             </Card>
-
-            <Card
-              sx={{
-                minWidth: 140,
-                flexShrink: 0,
-                textAlign: 'center',
-                backgroundColor: 'background.paper',
-                ':hover': { boxShadow: 4 },
-              }}
-            >
+            <Card sx={{ minWidth: 140, textAlign: 'center', flexShrink: 0 }}>
               <CardContent>
                 <Box
                   sx={{
@@ -165,7 +118,9 @@ function Dashboard() {
                     justifyContent: 'center',
                   }}
                 >
-                  <EmojiEventsIcon sx={{ color: 'primary.main' }} />
+                  <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
+                    BE
+                  </Typography>
                 </Box>
                 <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
                   Bread Expert
@@ -178,18 +133,12 @@ function Dashboard() {
           </Box>
         </Grid>
 
-        {/* Right Column: Recommended */}
+        {/* Right Column (Recommended) */}
         <Grid item xs={12} lg={4}>
           <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2, color: 'primary.main' }}>
             Recommended for You
           </Typography>
-          <Card
-            sx={{
-              mb: 3,
-              backgroundColor: 'background.paper',
-              ':hover': { boxShadow: 4 },
-            }}
-          >
+          <Card sx={{ mb: 3 }}>
             <CardMedia
               component="img"
               image="/img/banner/cta-standard-3.webp"
@@ -200,15 +149,14 @@ function Dashboard() {
               <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
                 Introduction to Bread Making
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, mt: 1 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                 <Rating value={5} readOnly size="small" />
-                <Typography variant="caption" sx={{ ml: 1 }} color="text.secondary">
+                <Typography variant="caption" sx={{ ml: 1 }}>
                   (39)
                 </Typography>
               </Box>
-              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                Liquorice caramels chupa chups bonbon. Jelly-o candy sugar chocolate cake caramels
-                apple pie lollipop jujubes.
+              <Typography variant="body2" sx={{ mb: 2 }}>
+                Liquorice caramels chupa chups bonbon. Jelly-o candy sugar chocolate cake caramels apple pie lollipop jujubes.
               </Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                 $27.50
@@ -225,7 +173,7 @@ function Dashboard() {
 
       <Divider sx={{ my: 4 }} />
 
-      {/* Next Row: e.g. Related Subjects, Your Time, Paths */}
+      {/* Next Row: Subjects, Your Time, Paths */}
       <Grid container spacing={3}>
         {/* Related Subjects */}
         <Grid item xs={12} md={4}>
@@ -234,15 +182,10 @@ function Dashboard() {
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Card
-                sx={{
-                  textAlign: 'center',
-                  py: 2,
-                  backgroundColor: 'background.paper',
-                  ':hover': { boxShadow: 4 },
-                }}
-              >
-                <DonutSmallIcon sx={{ color: 'primary.main', fontSize: 32 }} />
+              <Card sx={{ textAlign: 'center', py: 2 }}>
+                <Typography variant="h5" sx={{ color: 'primary.main' }}>
+                  🍩
+                </Typography>
                 <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 1 }}>
                   Cupcakes
                 </Typography>
@@ -252,15 +195,10 @@ function Dashboard() {
               </Card>
             </Grid>
             <Grid item xs={6}>
-              <Card
-                sx={{
-                  textAlign: 'center',
-                  py: 2,
-                  backgroundColor: 'background.paper',
-                  ':hover': { boxShadow: 4 },
-                }}
-              >
-                <DonutSmallIcon sx={{ color: 'primary.main', fontSize: 32 }} />
+              <Card sx={{ textAlign: 'center', py: 2 }}>
+                <Typography variant="h5" sx={{ color: 'primary.main' }}>
+                  🍞
+                </Typography>
                 <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 1 }}>
                   Breads
                 </Typography>
@@ -277,24 +215,8 @@ function Dashboard() {
           <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2, color: 'primary.main' }}>
             Your Time
           </Typography>
-          <Card
-            sx={{
-              height: 240,
-              backgroundColor: 'background.paper',
-              ':hover': { boxShadow: 4 },
-            }}
-          >
-            <CardContent
-              sx={{
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <BarChartIcon sx={{ fontSize: 48, color: 'primary.main', mr: 1 }} />
-              <Typography>Your stats or chart placeholder</Typography>
-            </CardContent>
+          <Card sx={{ height: 240, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Typography>Your stats or chart placeholder</Typography>
           </Card>
         </Grid>
 
@@ -303,34 +225,17 @@ function Dashboard() {
           <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2, color: 'primary.main' }}>
             Paths
           </Typography>
-          <Card
-            sx={{
-              height: 240,
-              backgroundColor: 'background.paper',
-              ':hover': { boxShadow: 4 },
-            }}
-          >
-            <CardContent
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center',
-                height: '100%',
-              }}
-            >
-              <Box>
-                <PlayCircleFilledWhiteIcon sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
-                <Typography>You are not on any path!</Typography>
-                <Button variant="contained" sx={{ mt: 2 }}>
-                  Take a Path
-                </Button>
-              </Box>
-            </CardContent>
+          <Card sx={{ height: 240, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+            <Box>
+              <Typography>You are not on any path!</Typography>
+              <Button variant="contained" sx={{ mt: 2 }}>
+                Take a Path
+              </Button>
+            </Box>
           </Card>
         </Grid>
       </Grid>
-    </Box>
+    </PageContainer>
   );
 }
 

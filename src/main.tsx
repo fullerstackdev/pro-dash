@@ -1,10 +1,9 @@
-// main.tsx (or index.tsx)
+// v1.3 - main.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import theme from './theme'; // import the createTheme from above
+import theme from './theme';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

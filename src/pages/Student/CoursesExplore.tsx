@@ -1,3 +1,4 @@
+// v1.3 - CoursesExplore.tsx
 import React from 'react';
 import {
   Box,
@@ -13,6 +14,7 @@ import {
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ExploreIcon from '@mui/icons-material/Explore';
 import StarIcon from '@mui/icons-material/Star';
+import PageContainer from '../../layout/PageContainer';
 
 /**
  * Version 1.1:
@@ -100,20 +102,11 @@ function CoursesExplore() {
   ];
 
   return (
-    <Box sx={{ p: 3, minHeight: '100vh' }}>
-      {/* Page Title */}
-      <Box display="flex" alignItems="center" mb={3}>
-        <ExploreIcon sx={{ color: 'primary.main', fontSize: 32, mr: 1 }} />
-        <Box>
-          <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-            Course Explore
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Elearning Portal Course Explore Page
-          </Typography>
-        </Box>
-      </Box>
-
+    <PageContainer
+      title="Course Explore"
+      subtitle="Elearning Portal Course Explore Page"
+      icon={<ExploreIcon sx={{ color: 'primary.main', fontSize: 32 }} />}
+    >
       {/* Popular Section */}
       <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
         <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
@@ -128,18 +121,11 @@ function CoursesExplore() {
           View All
         </Button>
       </Box>
+
       <Grid container spacing={3} mb={4}>
         {popularCourses.map((course) => (
           <Grid item xs={12} sm={6} md={3} key={course.id}>
-            <Card
-              sx={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: 'background.paper',
-                ':hover': { boxShadow: 4 },
-              }}
-            >
+            <Card sx={{ height: '100%' }}>
               <CardMedia
                 component="img"
                 image={course.image}
@@ -158,19 +144,18 @@ function CoursesExplore() {
                     icon={<StarIcon fontSize="inherit" />}
                     emptyIcon={<StarIcon fontSize="inherit" sx={{ opacity: 0.4 }} />}
                   />
-                  <Typography variant="caption" sx={{ ml: 1 }} color="text.secondary">
+                  <Typography variant="caption" sx={{ ml: 1 }}>
                     ({course.ratingCount})
                   </Typography>
                 </Box>
                 <Box>
                   <Typography
                     variant="caption"
-                    sx={{ textDecoration: 'line-through', mr: 1 }}
-                    color="text.secondary"
+                    sx={{ textDecoration: 'line-through', color: 'text.secondary' }}
                   >
                     ${course.oldPrice.toFixed(2)}
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 'medium', display: 'inline' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 'medium', ml: 1, display: 'inline' }}>
                     ${course.price.toFixed(2)}
                   </Typography>
                 </Box>
@@ -196,18 +181,11 @@ function CoursesExplore() {
           View All
         </Button>
       </Box>
+
       <Grid container spacing={3}>
         {trendingCourses.map((course) => (
           <Grid item xs={12} sm={6} md={3} key={course.id}>
-            <Card
-              sx={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: 'background.paper',
-                ':hover': { boxShadow: 4 },
-              }}
-            >
+            <Card sx={{ height: '100%' }}>
               <CardMedia
                 component="img"
                 image={course.image}
@@ -226,19 +204,18 @@ function CoursesExplore() {
                     icon={<StarIcon fontSize="inherit" />}
                     emptyIcon={<StarIcon fontSize="inherit" sx={{ opacity: 0.4 }} />}
                   />
-                  <Typography variant="caption" sx={{ ml: 1 }} color="text.secondary">
+                  <Typography variant="caption" sx={{ ml: 1 }}>
                     ({course.ratingCount})
                   </Typography>
                 </Box>
                 <Box>
                   <Typography
                     variant="caption"
-                    sx={{ textDecoration: 'line-through', mr: 1 }}
-                    color="text.secondary"
+                    sx={{ textDecoration: 'line-through', color: 'text.secondary' }}
                   >
                     ${course.oldPrice.toFixed(2)}
                   </Typography>
-                  <Typography variant="h6" sx={{ fontWeight: 'medium', display: 'inline' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 'medium', ml: 1, display: 'inline' }}>
                     ${course.price.toFixed(2)}
                   </Typography>
                 </Box>
@@ -247,7 +224,7 @@ function CoursesExplore() {
           </Grid>
         ))}
       </Grid>
-    </Box>
+    </PageContainer>
   );
 }
 

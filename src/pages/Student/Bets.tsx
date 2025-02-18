@@ -1,3 +1,4 @@
+// v1.3 - Bets.tsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -8,32 +9,26 @@ import {
   CardHeader,
   TextField,
   Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  TableContainer,
   Table,
   TableHead,
   TableRow,
   TableCell,
   TableBody,
   Paper,
-  TableContainer,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import CasinoIcon from '@mui/icons-material/Casino';
-
-/**
- * Version 1.1:
- * - Uses theme for background, paper
- * - Consistent text, spacing, hover
- */
+import PageContainer from '../../layout/PageContainer';
 
 function Bets() {
   const [betType, setBetType] = useState('');
   const [betAmount, setBetAmount] = useState('');
   const [betOdds, setBetOdds] = useState('');
-
   const [bets, setBets] = useState([
     { id: 1, type: 'Sports', amount: 50, odds: 2.1, result: 'Won', date: '2025-03-01' },
     { id: 2, type: 'Casino', amount: 20, odds: 1.5, result: 'Lost', date: '2025-03-02' },
@@ -56,21 +51,17 @@ function Bets() {
   };
 
   return (
-    <Box sx={{ p: 3, minHeight: '100vh' }}>
-      <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2, color: 'primary.main' }}>
-        Bets
-      </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
-        Place your bets, view ongoing wagers, or check historical bet results.
-      </Typography>
-
+    <PageContainer
+      title="Bets"
+      subtitle="Place your bets, view ongoing wagers, or check historical bet results."
+      icon={<SportsSoccerIcon sx={{ color: 'primary.main', fontSize: 32 }} />}
+    >
       <Grid container spacing={3}>
-        {/* Left Column: Place a Bet */}
         <Grid item xs={12} md={4}>
-          <Card sx={{ mb: 3, backgroundColor: 'background.paper', ':hover': { boxShadow: 4 } }}>
+          <Card>
             <CardHeader
               title="Place a Bet"
-              subheader="Fill out the details"
+              subheader="Fill out the details to place a new bet"
               avatar={<CasinoIcon color="primary" />}
             />
             <CardContent>
@@ -108,16 +99,20 @@ function Bets() {
                 onChange={(e) => setBetOdds(e.target.value)}
               />
 
-              <Button variant="contained" onClick={handlePlaceBet} disabled={!betType || !betAmount || !betOdds}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handlePlaceBet}
+                disabled={!betType || !betAmount || !betOdds}
+              >
                 Place Bet
               </Button>
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Right Column: Bet History */}
         <Grid item xs={12} md={8}>
-          <Card sx={{ backgroundColor: 'background.paper', ':hover': { boxShadow: 4 } }}>
+          <Card>
             <CardHeader
               title="Bet History"
               subheader="Your past and ongoing bets"
@@ -152,7 +147,7 @@ function Bets() {
           </Card>
         </Grid>
       </Grid>
-    </Box>
+    </PageContainer>
   );
 }
 

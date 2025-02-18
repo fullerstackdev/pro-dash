@@ -1,43 +1,28 @@
+// v1.3 - Invoice.tsx
 import React from 'react';
 import { Box, Typography, Card, CardContent, Divider, Button } from '@mui/material';
 import PrintIcon from '@mui/icons-material/Print';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
-
-/**
- * Admin Invoice, v1.2:
- * - Dark background, paper card
- * - Orange accents, consistent spacing
- */
+import PageContainer from '../../layout/PageContainer';
 
 function Invoice() {
   return (
-    <Box sx={{ p: 3, minHeight: '100vh' }}>
-      <Box display="flex" alignItems="center" mb={3}>
-        <ReceiptLongIcon sx={{ color: '#ff9800', fontSize: 32, mr: 1 }} />
-        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ff9800' }}>
-          Invoice
-        </Typography>
-      </Box>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-        Review or send invoice to customers.
-      </Typography>
-
-      <Card
-        sx={{
-          backgroundColor: 'background.paper',
-          color: 'text.primary',
-          ':hover': { boxShadow: 4 },
-        }}
-      >
+    <PageContainer
+      title="Invoice"
+      subtitle="Review or send invoice to customers."
+      icon={<ReceiptLongIcon sx={{ color: 'secondary.main', fontSize: 32 }} />}
+    >
+      <Card>
         <CardContent>
-          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1, color: '#ff9800' }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1, color: 'secondary.main' }}>
             Invoice #2345
           </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+          <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
             Issued: 03/10/2025
           </Typography>
           <Divider sx={{ mb: 2 }} />
 
+          {/* Example line items */}
           <Typography variant="body2" sx={{ mb: 1 }}>
             1x “Advanced Bread Course” - $50.00
           </Typography>
@@ -52,13 +37,13 @@ function Invoice() {
           <Button
             variant="outlined"
             startIcon={<PrintIcon />}
-            sx={{ mt: 2, color: '#ff9800', borderColor: '#ff9800' }}
+            sx={{ mt: 2, color: 'secondary.main', borderColor: 'secondary.main' }}
           >
             Print
           </Button>
         </CardContent>
       </Card>
-    </Box>
+    </PageContainer>
   );
 }
 

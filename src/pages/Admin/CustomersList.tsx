@@ -1,3 +1,4 @@
+// src/pages/Admin/CustomersList.tsx (v1.3)
 import React, { useState } from 'react';
 import {
   Box,
@@ -19,12 +20,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchIcon from '@mui/icons-material/Search';
 import PeopleIcon from '@mui/icons-material/People';
 
-/**
- * Admin Customers List, v1.2:
- * - Dark background, paper cards
- * - Orange accent
- * - CheckAll logic
- */
+import PageContainer from '../../layout/PageContainer';
 
 function CustomersList() {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
@@ -33,14 +29,14 @@ function CustomersList() {
 
   const allItems = Array.from({ length: 10 }, (_, i) => i + 1);
 
+  // Toggling single item
   const toggleSelectItem = (id: number) => {
-    if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter((x) => x !== id));
-    } else {
-      setSelectedItems([...selectedItems, id]);
-    }
+    setSelectedItems((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+    );
   };
 
+  // Toggle select all
   const handleAllSelectToggle = () => {
     if (selectedItems.length === allItems.length) {
       setSelectedItems([]);
@@ -49,22 +45,22 @@ function CustomersList() {
     }
   };
 
-  const handleMenuOpen = (e: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(e.currentTarget);
+  // For "Items per page" menu
+  const handleMenuOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
+    setAnchorEl(e.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
 
+  // For "Export" menu
   const handleExportMenuOpen = (e: React.MouseEvent<HTMLButtonElement>) =>
     setExportMenuAnchor(e.currentTarget);
   const handleExportMenuClose = () => setExportMenuAnchor(null);
 
   return (
-    <Box sx={{ p: 3, minHeight: '100vh' }}>
-      <Box display="flex" alignItems="center" mb={3}>
-        <PeopleIcon sx={{ color: '#ff9800', fontSize: 32, mr: 1 }} />
-        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ff9800' }}>
-          Customer List
-        </Typography>
-      </Box>
-
+    <PageContainer
+      title="Customer List"
+      subtitle="Browse or manage registered customers"
+      icon={<PeopleIcon sx={{ color: 'secondary.main', fontSize: 32 }} />}
+    >
       {/* Top Bar */}
       <Grid container spacing={2} mb={2}>
         <Grid item xs={12} md={5} lg={3}>
@@ -74,8 +70,7 @@ function CustomersList() {
               size="small"
               placeholder="Search"
               sx={{
-                '& .MuiOutlinedInput-root': { bgcolor: '#2a2a2a', color: 'text.primary' },
-                '& .MuiFormLabel-root': { color: 'text.secondary' },
+                '& .MuiOutlinedInput-root': { bgcolor: 'background.paper' },
               }}
               InputProps={{
                 endAdornment: <SearchIcon sx={{ color: 'text.secondary' }} />,
@@ -84,23 +79,30 @@ function CustomersList() {
           </Box>
         </Grid>
         <Grid item xs={12} md={7} lg={9} textAlign="right">
-          <IconButton sx={{ color: '#ff9800', mr: 1 }}>
+          {/* Print */}
+          <IconButton sx={{ color: 'secondary.main', mr: 1 }}>
             <PrintIcon />
           </IconButton>
-          <IconButton sx={{ color: '#ff9800', mr: 1 }} onClick={handleExportMenuOpen}>
+          {/* Export */}
+          <IconButton sx={{ color: 'secondary.main', mr: 1 }} onClick={handleExportMenuOpen}>
             <DownloadIcon />
           </IconButton>
-          <Menu anchorEl={exportMenuAnchor} open={Boolean(exportMenuAnchor)} onClose={handleExportMenuClose}>
+          <Menu
+            anchorEl={exportMenuAnchor}
+            open={Boolean(exportMenuAnchor)}
+            onClose={handleExportMenuClose}
+          >
             <MenuItem onClick={handleExportMenuClose}>Copy</MenuItem>
             <MenuItem onClick={handleExportMenuClose}>Excel</MenuItem>
             <MenuItem onClick={handleExportMenuClose}>CSV</MenuItem>
           </Menu>
 
+          {/* Items per page */}
           <Button
             variant="outlined"
             size="small"
             endIcon={<ArrowDropDownIcon />}
-            sx={{ mr: 1, textTransform: 'none', color: '#ff9800', borderColor: '#ff9800' }}
+            sx={{ mr: 1, textTransform: 'none', color: 'secondary.main', borderColor: 'secondary.main' }}
             onClick={handleMenuOpen}
           >
             10 Items
@@ -111,22 +113,23 @@ function CustomersList() {
             <MenuItem onClick={handleMenuClose}>20 Items</MenuItem>
           </Menu>
 
+          {/* Select All */}
           <Button
             variant="outlined"
             size="small"
             onClick={handleAllSelectToggle}
-            sx={{ textTransform: 'none', color: '#ff9800', borderColor: '#ff9800' }}
+            sx={{ textTransform: 'none', color: 'secondary.main', borderColor: 'secondary.main' }}
           >
             {selectedItems.length === allItems.length ? 'Unselect All' : 'Select All'}
           </Button>
         </Grid>
       </Grid>
 
-      {/* Header */}
+      {/* Header (visible on lg+) */}
       <Box
         sx={{
           display: { xs: 'none', lg: 'flex' },
-          bgcolor: '#2a2a2a',
+          bgcolor: 'background.paper',
           p: 2,
           borderRadius: 1,
           mb: 1,
@@ -172,8 +175,7 @@ function CustomersList() {
             key={itemId}
             sx={{
               mb: 1,
-              bgcolor: isSelected ? '#383838' : '#2a2a2a',
-              color: 'text.primary',
+              bgcolor: isSelected ? '#383838' : 'background.paper',
               ':hover': { boxShadow: 4 },
             }}
           >
@@ -183,14 +185,12 @@ function CustomersList() {
             >
               {/* ID */}
               <Box sx={{ width: { xs: '100%', lg: '10%' }, mb: { xs: 1, lg: 0 } }}>
-                <Typography
-                  variant="caption"
-                  sx={{ color: 'text.secondary', display: { lg: 'none' } }}
-                >
+                <Typography variant="caption" sx={{ color: 'text.secondary', display: { lg: 'none' } }}>
                   ID:{' '}
                 </Typography>
-                <Typography sx={{ color: '#ff9800' }}>24{itemId}</Typography>
+                <Typography sx={{ color: 'secondary.main' }}>24{itemId}</Typography>
               </Box>
+
               {/* NAME */}
               <Box sx={{ width: { xs: '50%', lg: '20%' }, mb: { xs: 1, lg: 0 } }}>
                 <Typography
@@ -201,6 +201,7 @@ function CustomersList() {
                 </Typography>
                 <Typography>Customer {itemId}</Typography>
               </Box>
+
               {/* LOCATION */}
               <Box sx={{ width: { xs: '50%', lg: '20%' }, mb: { xs: 1, lg: 0 } }}>
                 <Typography
@@ -211,6 +212,7 @@ function CustomersList() {
                 </Typography>
                 <Typography>Berlin, DE</Typography>
               </Box>
+
               {/* SPENT */}
               <Box sx={{ width: { xs: '50%', lg: '20%' }, mb: { xs: 1, lg: 0 } }}>
                 <Typography
@@ -221,6 +223,7 @@ function CustomersList() {
                 </Typography>
                 <Typography>$ {Math.round(Math.random() * 500).toFixed(2)}</Typography>
               </Box>
+
               {/* LAST ORDER */}
               <Box sx={{ width: { xs: '50%', lg: '20%' }, mb: { xs: 1, lg: 0 } }}>
                 <Typography
@@ -229,13 +232,14 @@ function CustomersList() {
                 >
                   LAST ORDER:{' '}
                 </Typography>
-                <Typography sx={{ color: '#ff9800' }}>{5300 + itemId}</Typography>
+                <Typography sx={{ color: 'secondary.main' }}>{5300 + itemId}</Typography>
               </Box>
-              {/* STATUS & Checkbox */}
-              <Box sx={{ width: { xs: '100%', lg: '10%' }, display: 'flex' }}>
+
+              {/* STATUS + Selection */}
+              <Box sx={{ width: { xs: '100%', lg: '10%' }, display: 'flex', ml: 'auto' }}>
                 <FormControlLabel
                   label=""
-                  control={<Checkbox checked={isSelected} sx={{ color: '#ff9800' }} />}
+                  control={<Checkbox checked={isSelected} sx={{ color: 'secondary.main' }} />}
                   sx={{ ml: 'auto' }}
                 />
               </Box>
@@ -250,12 +254,12 @@ function CustomersList() {
           count={3}
           shape="rounded"
           sx={{
-            button: { color: '#ff9800' },
-            'svg:not(.MuiPaginationItem-ellipsis)': { fill: '#ff9800' },
+            button: { color: 'secondary.main' },
+            'svg:not(.MuiPaginationItem-ellipsis)': { fill: 'secondary.main' },
           }}
         />
       </Box>
-    </Box>
+    </PageContainer>
   );
 }
 

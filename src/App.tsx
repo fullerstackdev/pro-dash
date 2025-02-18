@@ -1,4 +1,4 @@
-// src/App.tsx
+// v1.3 - App.tsx
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
@@ -13,13 +13,12 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleToggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
+    setSidebarOpen((prev) => !prev);
   };
 
   return (
     <AuthProvider>
       <BrowserRouter>
-        {/* Outer container: takes up full viewport height, dark background from theme */}
         <Box display="flex" flexDirection="column" minHeight="100vh">
           {/* Navbar (top) */}
           <Navbar onToggleSidebar={handleToggleSidebar} />
@@ -32,15 +31,15 @@ function App() {
             component="main"
             sx={{
               flex: 1,
-              // Leaves space for the sidebar on desktop:
               ml: { md: '240px' },
               p: 2,
+              bgcolor: 'background.default',
             }}
           >
             <AppRoutes />
           </Box>
 
-          {/* Footer at the bottom */}
+          {/* Footer */}
           <Footer />
         </Box>
       </BrowserRouter>
